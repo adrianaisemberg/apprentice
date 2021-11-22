@@ -1,0 +1,45 @@
+package com.adrianaisemberg.apprentice.service
+
+import com.google.gson.GsonBuilder
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+
+interface RetrofitBuilder {
+    fun build(): Retrofit
+}
+
+class RetrofitBuilderImpl : RetrofitBuilder {
+
+    override fun build(): Retrofit {
+        val client = OkHttpClient
+            .Builder()
+            .addInterceptor(HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            })
+            .addNetworkInterceptor { chain ->
+                val requestBuilder = chain.request()
+                    .newBuilder()
+                    .header(AUTHORIZATION, API_KEY)
+                chain.proceed(requestBuilder.build())
+            }
+            .build()
+
+        val gson = GsonBuilder()
+            .setLenient()
+            .create()
+
+        return Retrofit.Builder()
+            .baseUrl(URL)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .client(client)
+            .build()
+    }
+
+    companion object {
+        private const val AUTHORIZATION = "Authorization"
+        private const val API_KEY = "563492ad6f91700001000001cf90ff95995f419da77b43146fa201e6"
+        private const val URL = "https://api.pexels.com"
+    }
+}
