@@ -1,9 +1,11 @@
 package com.adrianaisemberg.apprentice
 
 import android.app.Activity
+import com.adrianaisemberg.apprentice.image.ImagesRecyclerAdapter
 import com.adrianaisemberg.apprentice.mvvm.ActivityViewModel
 import com.adrianaisemberg.apprentice.service.API
 import com.adrianaisemberg.apprentice.service.enqueue
+import com.adrianaisemberg.apprentice.utils.OnTextChangedListener
 import java.util.*
 import kotlin.concurrent.schedule
 
@@ -13,6 +15,8 @@ class MainActivityViewModel(
 ) : ActivityViewModel(activity),
     OnTextChangedListener {
 
+    var adapter = ImagesRecyclerAdapter()
+
     var timer: Timer? = null
 
     override fun onTextChanged(text: String) {
@@ -20,7 +24,11 @@ class MainActivityViewModel(
         timer = Timer()
         timer?.schedule(500) {
             api.searchImages(text).enqueue {
-                val results = it.body()
+                val results = it.body() ?: return@enqueue
+
+                adapter.setInitialResult(results)
+                adapter.notifyDataSetChanged()
+                // adapter.notifyItemRangeChanged(0, results.photos.size)
             }
         }
     }
