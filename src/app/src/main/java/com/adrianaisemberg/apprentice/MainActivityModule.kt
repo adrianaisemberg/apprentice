@@ -2,6 +2,7 @@ package com.adrianaisemberg.apprentice
 
 import android.app.Activity
 import com.adrianaisemberg.apprentice.service.API
+import com.adrianaisemberg.apprentice.utils.TimerThrottler
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,9 +16,11 @@ object MainActivityModule {
     fun provideMainActivityViewModel(
         activity: Activity,
         api: API,
+        timerThrottler: TimerThrottler,
     ): MainActivityViewModel =
         MainActivityViewModel(
             activity = activity,
             api = api,
+            timer = timerThrottler,
         )
 }
