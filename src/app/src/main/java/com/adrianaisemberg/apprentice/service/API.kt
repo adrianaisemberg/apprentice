@@ -7,5 +7,8 @@ import retrofit2.http.Query
 interface API {
 
     @GET("/v1/search")
-    fun searchImages(@Query("query") query: String): Call<ImageSearchResults>
+    fun searchImages(
+        @Query("query") query: String,
+        @Query("per_page") perPage: Int,
+    ): Call<ImageSearchResults>
 }

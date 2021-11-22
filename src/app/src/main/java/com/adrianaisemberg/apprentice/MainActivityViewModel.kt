@@ -18,8 +18,8 @@ class MainActivityViewModel(
     var adapter = ImagesRecyclerAdapter()
 
     override fun onTextChanged(text: String) {
-        timer.runAfter(5000) {
-            api.searchImages(text).enqueue {
+        timer.runAfter(500) {
+            api.searchImages(text, 30).enqueue {
                 val results = it.body() ?: return@enqueue
                 adapter.setInitialResult(results)
                 adapter.notifyDataSetChanged()
