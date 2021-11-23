@@ -28,14 +28,12 @@
 
         <ImageButton
             android:id="@+id/button_clear"
+            style="@style/BorderlessImageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_margin="8dp"
-            android:background="?selectableItemBackgroundBorderless"
             android:contentDescription="@string/clear"
             android:onClick="@{() -> viewModel.onClearSearch()}"
-            android:padding="8dp"
             android:src="@drawable/ic_baseline_clear_24"
             app:visibleOrGoneWithFading="@{viewModel.canClear}" />
 
