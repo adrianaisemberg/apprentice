@@ -17,7 +17,7 @@ class MainActivityViewModel(
     var adapter = ImagesRecyclerAdapter(api)
 
     override fun onTextChanged(text: String) {
-        timer.runAfter(2500) {
+        timer.runAfter(500) {
             adapter.search(text)
         }
     }

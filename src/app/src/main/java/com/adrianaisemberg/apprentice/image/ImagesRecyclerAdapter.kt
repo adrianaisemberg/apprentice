@@ -33,7 +33,9 @@ class ImagesRecyclerAdapter(
     fun search(text: String) {
         reset()
         currentSearchTerm = text
-        loadNextPage()
+        if (currentSearchTerm.isNotEmpty()) {
+            loadNextPage()
+        }
     }
 
     private fun reset() {
