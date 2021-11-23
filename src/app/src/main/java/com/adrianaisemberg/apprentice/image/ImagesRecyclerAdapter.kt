@@ -1,5 +1,6 @@
 package com.adrianaisemberg.apprentice.image
 
+import androidx.lifecycle.MutableLiveData
 import com.adrianaisemberg.apprentice.R
 import com.adrianaisemberg.apprentice.databinding.ViewImageItemBinding
 import com.adrianaisemberg.apprentice.navigation.Navigation
@@ -7,6 +8,7 @@ import com.adrianaisemberg.apprentice.recycler_view.ItemsRecyclerAdapter
 import com.adrianaisemberg.apprentice.service.API
 import com.adrianaisemberg.apprentice.service.ImageResult
 import com.adrianaisemberg.apprentice.service.enqueue
+import com.adrianaisemberg.apprentice.utils.async_ui
 
 class ImagesRecyclerAdapter(
     private val api: API,
@@ -16,6 +18,8 @@ class ImagesRecyclerAdapter(
     private val items = mutableListOf<ImageResult>()
     private var currentPageIndex: Int = 0
     private var currentSearchTerm: String = ""
+
+    var isLoading = MutableLiveData(false)
 
     override fun createViewHolder(binding: ViewImageItemBinding): ImageItemViewHolder {
         return ImageItemViewHolder(binding, navigation)
@@ -36,6 +40,9 @@ class ImagesRecyclerAdapter(
         reset()
         currentSearchTerm = text
         if (currentSearchTerm.isNotEmpty()) {
+            async_ui {
+                isLoading.value = true
+            }
             loadNextPage()
         }
     }
@@ -52,6 +59,9 @@ class ImagesRecyclerAdapter(
             perPage = PAGE_SIZE,
             page = currentPageIndex + 1,
         ).enqueue {
+            async_ui {
+                isLoading.value = false
+            }
             val results = it.body() ?: return@enqueue
             currentPageIndex = results.page
             val previousItemCount = itemCount

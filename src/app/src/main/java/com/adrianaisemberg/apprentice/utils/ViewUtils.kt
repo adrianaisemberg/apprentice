@@ -14,3 +14,19 @@ fun View.activity(): Activity? {
     }
     return null
 }
+
+fun View.fadeIn(duration: Long = 300, onEnd: Action? = null) {
+    animate()
+        .alpha(1F)
+        .setDuration(duration)
+        .withEndAction(onEnd)
+        .start()
+}
+
+fun View.fadeOut(duration: Long = 300, onEnd: Action? = null) {
+    animate()
+        .alpha(0F)
+        .setDuration(duration)
+        .withEndAction(onEnd)
+        .start()
+}

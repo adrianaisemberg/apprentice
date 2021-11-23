@@ -23,6 +23,14 @@
             android:inputType="text"
             app:onTextChanged="@{viewModel}" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/loading"
+            android:textSize="18sp"
+            app:visibleOrGoneWithFading="@{viewModel.adapter.isLoading}" />
+
         <com.adrianaisemberg.apprentice.recycler_view.ThreeColumnRecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -47,3 +47,14 @@ fun ImageView.imageUrlWithTouch(url: String?) {
         .override(SIZE_ORIGINAL, SIZE_ORIGINAL)
         .into(this)
 }
+
+@BindingAdapter("visibleOrGoneWithFading")
+fun visibleOrGoneWithFading(view: View, visibleOrGone: Boolean) {
+    if (visibleOrGone) {
+        view.visibility = View.VISIBLE
+        view.fadeIn()
+    } else {
+        view.fadeOut { view.visibility = View.GONE }
+    }
+}
+
