@@ -5,10 +5,16 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+/**
+ * a generic enqueue wrapper for handling responses, ignoring errors
+ */
 fun <T> Call<T>.enqueue(
     onResponse: ActionOf<Response<T>>,
 ) = enqueue(onResponse) {}
 
+/**
+ * a generic enqueue wrapper for handling responses and errors
+ */
 fun <T> Call<T>.enqueue(
     onResponse: ActionOf<Response<T>>,
     onFailure: ActionOf<Throwable>,

@@ -4,6 +4,9 @@ import android.app.Activity
 import android.content.ContextWrapper
 import android.view.View
 
+/**
+ * returns the activity this view is in
+ */
 fun View.activity(): Activity? {
     var ctx = context
     while (ctx is ContextWrapper) {
@@ -15,6 +18,12 @@ fun View.activity(): Activity? {
     return null
 }
 
+/**
+ * fades-in the specified view
+ *
+ * @param duration duration of the animation
+ * @param onEnd an action to run once the animation ends
+ */
 fun View.fadeIn(duration: Long = 300, onEnd: Action? = null) {
     animate()
         .alpha(1F)
@@ -23,6 +32,12 @@ fun View.fadeIn(duration: Long = 300, onEnd: Action? = null) {
         .start()
 }
 
+/**
+ * fades-out the specified view
+ *
+ * @param duration duration of the animation
+ * @param onEnd an action to run once the animation ends
+ */
 fun View.fadeOut(duration: Long = 300, onEnd: Action? = null) {
     animate()
         .alpha(0F)

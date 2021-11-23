@@ -10,6 +10,6 @@ import dagger.hilt.components.SingletonComponent
 object ServiceModule {
 
     @Provides
-    fun provideTicTacToeService(): API =
+    fun provideAPIService(): API =
         RetrofitBuilderImpl().build().create(API::class.java)
 }

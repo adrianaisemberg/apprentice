@@ -9,6 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.adrianaisemberg.apprentice.utils.activity
 import com.adrianaisemberg.apprentice.utils.layoutInflater
 
+/**
+ * a generic recycler adapter that encapsulates data-binding of view-holders
+ *
+ * @param TViewHolder the type of the view-holder
+ * @param TItemBinding the type of the data-binding object
+ * @property layoutId the view layout id
+ */
 abstract class ItemsRecyclerAdapter<
         TViewHolder : RecyclerView.ViewHolder,
         TItemBinding : ViewDataBinding>(@LayoutRes private val layoutId: Int) :
