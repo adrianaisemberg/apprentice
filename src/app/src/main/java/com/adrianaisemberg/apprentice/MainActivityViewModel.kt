@@ -1,7 +1,6 @@
 package com.adrianaisemberg.apprentice
 
 import android.app.Activity
-import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.adrianaisemberg.apprentice.image.ImagesRecyclerAdapter
 import com.adrianaisemberg.apprentice.mvvm.ActivityViewModel
@@ -30,7 +29,7 @@ class MainActivityViewModel(
         }
     }
 
-    fun onClearSearch(view: View) {
+    fun onClearSearch() {
         searchText.value = ""
     }
 }

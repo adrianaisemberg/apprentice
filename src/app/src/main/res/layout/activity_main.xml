@@ -34,7 +34,7 @@
             android:layout_margin="8dp"
             android:background="?selectableItemBackgroundBorderless"
             android:contentDescription="@string/clear"
-            android:onClick="@{viewModel::onClearSearch}"
+            android:onClick="@{() -> viewModel.onClearSearch()}"
             android:padding="8dp"
             android:src="@drawable/ic_baseline_clear_24"
             app:visibleOrGoneWithFading="@{viewModel.canClear}" />
