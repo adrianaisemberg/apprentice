@@ -2,6 +2,7 @@ package com.adrianaisemberg.apprentice.image
 
 import com.adrianaisemberg.apprentice.R
 import com.adrianaisemberg.apprentice.databinding.ViewImageItemBinding
+import com.adrianaisemberg.apprentice.navigation.Navigation
 import com.adrianaisemberg.apprentice.recycler_view.ItemsRecyclerAdapter
 import com.adrianaisemberg.apprentice.service.API
 import com.adrianaisemberg.apprentice.service.ImageResult
@@ -9,6 +10,7 @@ import com.adrianaisemberg.apprentice.service.enqueue
 
 class ImagesRecyclerAdapter(
     private val api: API,
+    private val navigation: Navigation,
 ) : ItemsRecyclerAdapter<ImageItemViewHolder, ViewImageItemBinding>(R.layout.view_image_item) {
 
     private val items = mutableListOf<ImageResult>()
@@ -16,7 +18,7 @@ class ImagesRecyclerAdapter(
     private var currentSearchTerm: String = ""
 
     override fun createViewHolder(binding: ViewImageItemBinding): ImageItemViewHolder {
-        return ImageItemViewHolder(binding)
+        return ImageItemViewHolder(binding, navigation)
     }
 
     override fun onBindViewHolder(holder: ImageItemViewHolder, position: Int) {

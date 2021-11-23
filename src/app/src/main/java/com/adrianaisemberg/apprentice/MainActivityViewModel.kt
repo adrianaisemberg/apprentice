@@ -3,6 +3,7 @@ package com.adrianaisemberg.apprentice
 import android.app.Activity
 import com.adrianaisemberg.apprentice.image.ImagesRecyclerAdapter
 import com.adrianaisemberg.apprentice.mvvm.ActivityViewModel
+import com.adrianaisemberg.apprentice.navigation.Navigation
 import com.adrianaisemberg.apprentice.service.API
 import com.adrianaisemberg.apprentice.utils.OnTextChangedListener
 import com.adrianaisemberg.apprentice.utils.TimerThrottler
@@ -10,11 +11,12 @@ import com.adrianaisemberg.apprentice.utils.TimerThrottler
 class MainActivityViewModel(
     activity: Activity,
     api: API,
+    navigation: Navigation,
     private val timer: TimerThrottler,
 ) : ActivityViewModel(activity),
     OnTextChangedListener {
 
-    var adapter = ImagesRecyclerAdapter(api)
+    var adapter = ImagesRecyclerAdapter(api, navigation)
 
     override fun onTextChanged(text: String) {
         timer.runAfter(500) {

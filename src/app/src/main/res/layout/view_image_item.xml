@@ -6,17 +6,21 @@
 
         <variable
             name="viewModel"
-            type="com.adrianaisemberg.apprentice.service.ImageResult" />
+            type="com.adrianaisemberg.apprentice.image.ImageItemViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:onClick="@{viewModel::onClick}">
 
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:backgroundColorString="@{viewModel.averageColor}"
+            app:backgroundColorString="@{viewModel.imageResult.averageColor}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="H,1:1"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -27,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitCenter"
-            app:imageUrl="@{viewModel.src.tiny}" />
+            app:imageUrl="@{viewModel.imageResult.src.tiny}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
