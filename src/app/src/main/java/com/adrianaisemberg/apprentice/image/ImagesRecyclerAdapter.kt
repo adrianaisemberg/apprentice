@@ -20,6 +20,8 @@ class ImagesRecyclerAdapter(
     private var currentSearchTerm: String = ""
 
     var isLoading = MutableLiveData(false)
+    var isError = MutableLiveData(false)
+    var errorText = MutableLiveData<String>(null)
 
     override fun createViewHolder(binding: ViewImageItemBinding): ImageItemViewHolder {
         return ImageItemViewHolder(binding, navigation)
@@ -42,6 +44,8 @@ class ImagesRecyclerAdapter(
         if (currentSearchTerm.isNotEmpty()) {
             async_ui {
                 isLoading.value = true
+                isError.value = false
+                errorText.value = null
             }
             loadNextPage()
         }
@@ -58,16 +62,27 @@ class ImagesRecyclerAdapter(
             query = currentSearchTerm,
             perPage = PAGE_SIZE,
             page = currentPageIndex + 1,
-        ).enqueue {
-            async_ui {
-                isLoading.value = false
+        ).enqueue(
+            onResponse = { response ->
+                async_ui {
+                    isLoading.value = false
+                    isError.value = false
+                    errorText.value = null
+                }
+                val results = response.body() ?: return@enqueue
+                currentPageIndex = results.page
+                val previousItemCount = itemCount
+                items.addAll(results.photos)
+                notifyItemRangeInserted(previousItemCount, results.photos.size)
+            },
+            onFailure = { error ->
+                async_ui {
+                    isLoading.value = false
+                    isError.value = true
+                    errorText.value = error.message
+                }
             }
-            val results = it.body() ?: return@enqueue
-            currentPageIndex = results.page
-            val previousItemCount = itemCount
-            items.addAll(results.photos)
-            notifyItemRangeInserted(previousItemCount, results.photos.size)
-        }
+        )
     }
 
     companion object {

@@ -54,5 +54,17 @@
             android:layout_below="@id/search_box"
             android:adapter="@{viewModel.adapter}" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/search_box"
+            android:background="@color/error"
+            android:padding="16dp"
+            android:text="@{viewModel.adapter.errorText}"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:visibleOrGoneWithFading="@{viewModel.adapter.isError}"
+            tools:ignore="RelativeOverlap" />
+
     </RelativeLayout>
 </layout>
