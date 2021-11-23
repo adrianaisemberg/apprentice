@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -18,10 +19,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:layout_toStartOf="@id/button_clear"
             android:hint="@string/search_hint"
             android:importantForAutofill="no"
             android:inputType="text"
+            android:text="@{viewModel.searchText}"
             app:onTextChanged="@{viewModel}" />
+
+        <ImageButton
+            android:id="@+id/button_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="8dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:contentDescription="@string/clear"
+            android:onClick="@{viewModel::onClearSearch}"
+            android:padding="8dp"
+            android:src="@drawable/ic_baseline_clear_24"
+            app:visibleOrGoneWithFading="@{viewModel.canClear}" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -29,7 +45,8 @@
             android:layout_centerInParent="true"
             android:text="@string/loading"
             android:textSize="18sp"
-            app:visibleOrGoneWithFading="@{viewModel.adapter.isLoading}" />
+            app:visibleOrGoneWithFading="@{viewModel.adapter.isLoading}"
+            tools:ignore="RelativeOverlap" />
 
         <com.adrianaisemberg.apprentice.recycler_view.ThreeColumnRecyclerView
             android:layout_width="match_parent"

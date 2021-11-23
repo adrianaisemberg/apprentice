@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../apprentice/src/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.137" />
+        <entry key="../../apprentice/src/app/src/main/res/drawable/ic_baseline_clear_24.xml" value="0.137" />
         <entry key="../../apprentice/src/app/src/main/res/layout/activity_image_viewer.xml" value="0.1" />
         <entry key="../../apprentice/src/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="../../apprentice/src/app/src/main/res/layout/view_image_item.xml" value="0.26222826086956524" />

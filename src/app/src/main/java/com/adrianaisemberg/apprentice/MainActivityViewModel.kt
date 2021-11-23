@@ -1,6 +1,8 @@
 package com.adrianaisemberg.apprentice
 
 import android.app.Activity
+import android.view.View
+import androidx.lifecycle.MutableLiveData
 import com.adrianaisemberg.apprentice.image.ImagesRecyclerAdapter
 import com.adrianaisemberg.apprentice.mvvm.ActivityViewModel
 import com.adrianaisemberg.apprentice.navigation.Navigation
@@ -17,10 +19,18 @@ class MainActivityViewModel(
     OnTextChangedListener {
 
     var adapter = ImagesRecyclerAdapter(api, navigation)
+    var canClear = MutableLiveData(false)
+    var searchText = MutableLiveData("")
 
     override fun onTextChanged(text: String) {
+        canClear.value = text.isNotEmpty()
+
         timer.runAfter(500) {
             adapter.search(text)
         }
+    }
+
+    fun onClearSearch(view: View) {
+        searchText.value = ""
     }
 }
