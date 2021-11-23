@@ -8,6 +8,7 @@ class ImageItemViewModel(
     val imageResult: ImageResult,
     private val navigation: Navigation,
 ) {
+    @Suppress("UNUSED_PARAMETER")
     fun onClick(view: View) {
         navigation.openImage(imageResult)
     }

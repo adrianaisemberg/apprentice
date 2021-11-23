@@ -1,4 +1,4 @@
-package com.adrianaisemberg.apprentice.navigation
+package com.adrianaisemberg.apprentice.image
 
 import android.app.Activity
 import dagger.Module
@@ -8,8 +8,9 @@ import dagger.hilt.android.components.ActivityComponent
 
 @Module
 @InstallIn(ActivityComponent::class)
-object NavigationModule {
+object ImageViewerModule {
 
     @Provides
-    fun provideNavigation(activity: Activity): Navigation = NavigationImpl(activity)
+    fun provideImageViewerViewModel(activity: Activity): ImageViewerViewModel =
+        ImageViewerViewModel(activity)
 }
