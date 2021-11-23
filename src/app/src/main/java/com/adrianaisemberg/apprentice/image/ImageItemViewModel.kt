@@ -1,6 +1,5 @@
 package com.adrianaisemberg.apprentice.image
 
-import android.view.View
 import com.adrianaisemberg.apprentice.navigation.Navigation
 import com.adrianaisemberg.apprentice.service.ImageResult
 
@@ -8,8 +7,7 @@ class ImageItemViewModel(
     val imageResult: ImageResult,
     private val navigation: Navigation,
 ) {
-    @Suppress("UNUSED_PARAMETER")
-    fun onClick(view: View) {
+    fun onClick() {
         navigation.openImage(imageResult)
     }
 }
