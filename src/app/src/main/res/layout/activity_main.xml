@@ -17,7 +17,10 @@
             android:id="@+id/search_box"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="8dp"
             android:hint="@string/search_hint"
+            android:importantForAutofill="no"
+            android:inputType="text"
             app:onTextChanged="@{viewModel}" />
 
         <com.adrianaisemberg.apprentice.recycler_view.ThreeColumnRecyclerView
