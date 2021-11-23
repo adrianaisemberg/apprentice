@@ -4,27 +4,21 @@ import android.app.Activity
 import com.adrianaisemberg.apprentice.image.ImagesRecyclerAdapter
 import com.adrianaisemberg.apprentice.mvvm.ActivityViewModel
 import com.adrianaisemberg.apprentice.service.API
-import com.adrianaisemberg.apprentice.service.enqueue
 import com.adrianaisemberg.apprentice.utils.OnTextChangedListener
 import com.adrianaisemberg.apprentice.utils.TimerThrottler
 
 class MainActivityViewModel(
     activity: Activity,
-    private val api: API,
+    api: API,
     private val timer: TimerThrottler,
 ) : ActivityViewModel(activity),
     OnTextChangedListener {
 
-    var adapter = ImagesRecyclerAdapter()
+    var adapter = ImagesRecyclerAdapter(api)
 
     override fun onTextChanged(text: String) {
-        timer.runAfter(500) {
-            api.searchImages(text, 30).enqueue {
-                val results = it.body() ?: return@enqueue
-                adapter.setInitialResult(results)
-                adapter.notifyDataSetChanged()
-                // adapter.notifyItemRangeChanged(0, results.photos.size)
-            }
+        timer.runAfter(2500) {
+            adapter.search(text)
         }
     }
 }

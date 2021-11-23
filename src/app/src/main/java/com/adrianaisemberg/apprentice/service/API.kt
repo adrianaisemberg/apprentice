@@ -10,5 +10,6 @@ interface API {
     fun searchImages(
         @Query("query") query: String,
         @Query("per_page") perPage: Int,
+        @Query("page") page: Int,
     ): Call<ImageSearchResults>
 }
