@@ -5,7 +5,7 @@ import android.content.ContextWrapper
 import android.view.View
 
 /**
- * returns the activity this view is in
+ * returns the activity containing this view
  */
 fun View.activity(): Activity? {
     var ctx = context
